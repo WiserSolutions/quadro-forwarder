@@ -1,0 +1,14 @@
+{
+  "name": "quadro_forwarder_app",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node app.js",
+    "test": "nyc --reporter=text-summary --reporter=lcov node app.js test"
+  },
+  "dependencies": {
+    "quadro": "^0.6.18"
+  },
+  "devDependencies": {
+    "nyc": "^10.3.2"
+  }
+}
