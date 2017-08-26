@@ -1,0 +1,11 @@
+name: 'service'
+messages:
+  host: 'amqp://localhost'
+  retryDelay: 100
+forwarder:
+  endpoint : http://forwarder/:type
+  subscriptions:
+    - test.event1
+    - test.event2
+storage:
+  host: 'mongodb://localhost:27017/hub'

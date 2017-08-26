@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    working_directory: /tmp/quadro-forwarder
+    docker:
+      - image: shapigor/quadro
+      - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
+      - image: mongo:3
+      - image: rabbitmq:latest
+    steps:
+      - checkout
+      - restore_cache:
+          key: quadro-forwarder-{{ checksum "package.json" }}
+      - run: npm install
+      - run: npm test
+      - save_cache:
+          key: quadro-forwarder-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - store_artifacts:
+          path: /tmp/quadro-forwarder/coverage/lcov-report
+          destination: coverage
