@@ -16,9 +16,12 @@ describe('MessageForwarderTest', function() {
     await channel.bindQueue('service_in', 'test.event1', '')
     // Register a http handler
     let messageRecieved
-    let remoteHandler = nock('http://forwarder').post('/test.event1', body => {
-      messageRecieved = body
-    }).reply(200, 'SUCCESS')
+    let remoteHandler = nock('http://forwarder')
+      .post('/test.event1')
+      .reply(200, function(uri, requestBody) {
+        messageRecieved = requestBody
+        return requestBody
+      })
     // Send a message
     await QT.httpTest.post('/message').send({
       type: 'test.event1',
