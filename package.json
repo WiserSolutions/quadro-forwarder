@@ -6,7 +6,11 @@
     "test": "nyc --reporter=text-summary --reporter=lcov node app.js test"
   },
   "dependencies": {
-    "quadro": "^0.6.18"
+    "quadro": "^0.6.18",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-standard": "^3.0.1"
   },
   "devDependencies": {
     "nyc": "^10.3.2"
