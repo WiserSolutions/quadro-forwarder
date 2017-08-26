@@ -15,7 +15,7 @@ module.exports = class MessageForwarder {
 
   async handle(messageContext) {
     let failed = false
-    try{
+    try {
       await this.request({
         forever: true,
         method: 'POST',
@@ -26,12 +26,12 @@ module.exports = class MessageForwarder {
         },
         json: true
       })
-    } catch(err) {
-      Q.log.info(err)
+    } catch (err) {
+      Q.log.error({err}, 'Error while handling message')
       failed = true
       messageContext.failure()
     }
-    if(!failed) messageContext.success()
+    if (!failed) messageContext.success()
   }
 
   getMessageEndpoint(messageType) {
