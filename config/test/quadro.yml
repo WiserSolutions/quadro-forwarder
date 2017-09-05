@@ -1,0 +1,3 @@
+---
+initializers:
+  start_forwarder: false

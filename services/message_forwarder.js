@@ -1,7 +1,8 @@
 module.exports = class MessageForwarder {
-  constructor(request, hubMessageProcessor = 'pubsub:hubMessageProcessor') {
+  constructor(request, endpoint, hubMessageProcessor = 'pubsub:hubMessageProcessor') {
     this.request = request
     this.hubMessageProcessor = hubMessageProcessor
+    this.endpoint = endpoint
   }
 
   async initialize() {
@@ -19,7 +20,7 @@ module.exports = class MessageForwarder {
       await this.request({
         forever: true,
         method: 'POST',
-        uri: this.getMessageEndpoint(messageContext.rawMessage.messageType),
+        uri: this.endpoint.buildMessageHandlerUrl(messageContext.rawMessage.messageType),
         body: {
           messageType: messageContext.rawMessage.messageType,
           content: messageContext.message
@@ -32,9 +33,5 @@ module.exports = class MessageForwarder {
       messageContext.failure()
     }
     if (!failed) messageContext.success()
-  }
-
-  getMessageEndpoint(messageType) {
-    return Q.config.get('service.forwarder.endpoint').replace(':type', messageType)
   }
 }
