@@ -1,7 +1,7 @@
 const waitPort = require('wait-port')
 const URL = require('url')
 
-const TimeoutError = Q.Errors.declareError('EndpointAvailabilityTimeoutError')
+const TimeoutError = Q.Errors.declare('EndpointAvailabilityTimeoutError')
 
 module.exports = function Endpoint(config) {
   const DEFAULT_TIMEOUT = 30000 // 30 seconds
