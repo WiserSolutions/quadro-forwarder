@@ -10,7 +10,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "quadro": "^1.0.10",
+    "quadro": "^1.0.12",
     "wait-port": "^0.2.2"
   },
   "devDependencies": {
